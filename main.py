@@ -101,7 +101,7 @@ async def get_highscore(map_id: str):
     return {el["player"]: el["score"] for el in await database.fetch_all(highscores.select().where(highscores.c.map == map_id).order_by(highscores.c.score))}
 
 
-@app.post("/highscores/{map_id}/{player}/{score}")
+@app.post("/highscores/{map_id}/{player}/{score}", include_in_schema=False)
 async def set_highscore(map_id: str, player: str, score: int):
     query = highscores.select().where(highscores.c.map == map_id).where(highscores.c.player == player)
     if await database.fetch_one(query):

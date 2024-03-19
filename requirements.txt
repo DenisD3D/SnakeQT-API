@@ -6,3 +6,4 @@ pydantic
 starlette
 psycopg2
 gunicorn
+uvicorn
