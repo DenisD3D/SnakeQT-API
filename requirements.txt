@@ -5,3 +5,4 @@ fastapi
 pydantic
 starlette
 psycopg2
+gunicorn
