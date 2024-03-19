@@ -7,3 +7,4 @@ starlette
 psycopg2
 gunicorn
 uvicorn
+asyncpg
