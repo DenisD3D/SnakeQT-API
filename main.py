@@ -13,7 +13,7 @@ from starlette.responses import RedirectResponse, FileResponse, JSONResponse, Re
 
 dotenv.load_dotenv()
 
-database = databases.Database(os.environ.get("DATABASE_URL"))
+database = databases.Database(os.environ.get("DATABASE_URL"), min_size=3, max_size=5)
 metadata = sqlalchemy.MetaData()
 
 highscores = sqlalchemy.Table(
@@ -26,7 +26,9 @@ highscores = sqlalchemy.Table(
 )
 
 engine = sqlalchemy.create_engine(
-    os.environ.get("DATABASE_URL"), connect_args={"check_same_thread": False}
+    os.environ.get("DATABASE_URL"),
+    pool_size=3,
+    max_overflow=0
 )
 metadata.create_all(engine)
 
