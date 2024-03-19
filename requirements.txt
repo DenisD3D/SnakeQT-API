@@ -1,0 +1,7 @@
+databases
+python-dotenv
+SQLAlchemy
+fastapi
+pydantic
+starlette
+psycopg2
