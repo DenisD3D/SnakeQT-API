@@ -106,8 +106,9 @@ async def get_highscore(map_id: str):
 @app.get("/highscores/{map_id}/{player}/{score}", include_in_schema=False)
 async def set_highscore(map_id: str, player: str, score: int):
     query = highscores.select().where(highscores.c.map == map_id).where(highscores.c.player == player)
-    if await database.fetch_one(query):
-        if await database.fetch_val(query, highscores.c.score) > score:
+    entry = await database.fetch_one(query)
+    if entry:
+        if entry["score"] >= score:
             return {"status": "ok"}
         query = highscores.update().where(highscores.c.map == map_id).where(highscores.c.player == player).values(score=score)
     else:
